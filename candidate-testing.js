@@ -11,34 +11,51 @@ let candidateAnswer = "";
 
 
 //TODO: Variables for Part 2
-let questions = ""
-let correctAnswers = ""
-let candidateAnswers = ""
+let questions = ["Who was the first American woman in space? ", "True or false: 5 kilometer == 5000 meters? ", "(5 + 3)/2 * 10 = ? ", "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ", "What is the minimum crew size for the ISS? "];
+let correctAnswers = ['Sally Ride', 'true', '40', 'Trajectory', '3'];
+let candidateAnswers = [];
 
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
-let candidateName = input.question("Candidate, what is your name?")
+let candidateName = input.question("Candidate, what is your name? ");
 }
 
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-let candidateAnswer = input.question("Who was the first American woman in space? ")
+for (let i = 0; i < questions.length; i++){
+  candidateAnswers.push(input.question(questions[i]));
+  
 
-}
+  }
+
+  }
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-if (!correctAnswer) {
-  console.log("Answer is FALSE.");
+for (let i = 0; i < questions.length; i++) {
+  if (candidateAnswers[i] !== correctAnswers[i]) {
+    console.log(`This is your answer ${candidateAnswers[i]}, this is the correct answer, ${correctAnswers[i]}`);
 } else {
   console.log("Answer is CORRECT!");
 }
 
+}
+  let answersGrade = 0;  //TODO 3.2 use this variable to calculate the candidates score.
+for (let i = 0; i < candidateAnswers.length; i++){
+  if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()){
+    answersGrade++;}
+}
+  let grade = (answersGrade) / (questions.length) * 100;
 
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+  let passOrFail = "";
 
-
+  if (grade >= 80) {
+    passOrFail = "Pass";
+  } else {
+    passOrFail = "Fail";
+  }
+  console.log(`Candidate's grade is ${grade}%. Pass or Fail: ${passOrFail}.  `);
   return grade;
 }
 
