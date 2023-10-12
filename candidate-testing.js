@@ -3,7 +3,7 @@ const input = require('readline-sync');
 // TODO 2: modify your quiz app to ask 5 questions //
 
 // TODO 1.1a: Define candidateName // 
-let candidateName = "";
+let candidateName = input.question("Candidate, what is your name? ");
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
 let question = "Who was the first American woman in space? ";
 let correctAnswer = "Sally Ride";
@@ -17,14 +17,13 @@ let candidateAnswers = [];
 
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
-let candidateName = input.question("Candidate, what is your name? ");
+//let candidateName = input.question("Candidate, what is your name? ");
 }
 
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
 for (let i = 0; i < questions.length; i++){
   candidateAnswers.push(input.question(questions[i]));
-  
 
   }
 
@@ -34,10 +33,10 @@ function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 for (let i = 0; i < questions.length; i++) {
-  if (candidateAnswers[i] !== correctAnswers[i]) {
-    console.log(`This is your answer ${candidateAnswers[i]}, this is the correct answer, ${correctAnswers[i]}`);
+  if (candidateAnswers[i].toLowerCase() !== correctAnswers[i].toLowerCase()) {
+    //console.log(`Your Answer: ${candidateAnswers[i]} \nCorrect Answer: ${correctAnswers[i]}`);
 } else {
-  console.log("Answer is CORRECT!");
+  //console.log(`Your Answer: ${candidateAnswers[i]} \nCorrect Answer: ${correctAnswers[i]}`);
 }
 
 }
@@ -49,20 +48,29 @@ for (let i = 0; i < candidateAnswers.length; i++){
   let grade = (answersGrade) / (questions.length) * 100;
 
   let passOrFail = "";
-
+  let questionsArr = ["1) Who was the first American woman in space? ", "\n2) True or false: 5 kilometer == 5000 meters? ", "\n3) (5 + 3)/2 * 10 = ? ", "\n4) Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ", "\n5) What is the minimum crew size for the ISS? "];
+  
   if (grade >= 80) {
-    passOrFail = "Pass";
+    passOrFail = "Passed";
   } else {
-    passOrFail = "Fail";
+    passOrFail = "Failed";
   }
-  console.log(`Candidate's grade is ${grade}%. Pass or Fail: ${passOrFail}.  `);
+
+  console.log(`\nCandidate Name: ${candidateName}`);
+
+  for (let i = 0; i < questionsArr.length; i++){
+    console.log(questionsArr[i]);
+    console.log(`Your Answer: ${candidateAnswers[i]} \nCorrect Answer: ${correctAnswers[i]}`);
+  }
+
+  console.log(`\n>>> Overall Grade: ${grade}% (${answersGrade} of 5 responses correct) <<< \n>>> Status: ${passOrFail} <<<`);
   return grade;
 }
 
 function runProgram() {
   askForName();
   // TODO 1.1c: Greet candidate using their name //
-   console.log("Hello, " + candidateName + "!");
+   console.log(`Hello ${candidateName}!`);
   askQuestion();
   gradeQuiz(this.candidateAnswers);
 }
